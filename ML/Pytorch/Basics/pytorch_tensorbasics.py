@@ -40,23 +40,23 @@ print(f"my_tensor.requires_grad: {my_tensor.requires_grad}")  # Prints true/fals
 x = torch.empty(size=(3, 3))  # Tensor of shape 3x3 with uninitialized data
 print(f"x = torch.empty(size=(3, 3)): \n{x}\n")
 x = torch.zeros((3, 3))  # Tensor of shape 3x3 with values of 0
-print(f"x =torch.zeros((3, 3)): \n{x}\n")
+print(f"x = torch.zeros((3, 3)): \n{x}\n")
 x = torch.rand((3, 3))  # Tensor of shape 3x3 with values from uniform distribution in interval [0,1)
-print(f"x =torch.rand((3, 3)): \n{x}\n")
+print(f"x = torch.rand((3, 3)): \n{x}\n")
 x = torch.ones((3, 3))  # Tensor of shape 3x3 with values of 1
-print(f"x =torch.ones((3, 3)): \n{x}\n")
+print(f"x = torch.ones((3, 3)): \n{x}\n")
 x = torch.eye(5, 5)  # Returns Identity Matrix I, (I <-> Eye), matrix of shape 2x3
-print(f"x =torch.eye(5, 5): \n{x}\n")
+print(f"x = torch.eye(5, 5): \n{x}\n")
 x = torch.arange(start=0, end=5, step=1) # Tensor [0, 1, 2, 3, 4], note, can also do: torch.arange(11)
-print(f"x =torch.arange(start=0, end=5, step=1): \n{x}\n")
+print(f"x = torch.arange(start=0, end=5, step=1): \n{x}\n")
 x = torch.linspace(start=0.1, end=1, steps=10)  # x = [0.1, 0.2, ..., 1]
-print(f"x =torch.linspace(start=0.1, end=1, steps=10): \n{x}\n")
+print(f"x = torch.linspace(start=0.1, end=1, steps=10): \n{x}\n")
 x = torch.empty(size=(1, 5)).normal_(mean=0, std=1)  # Normally distributed with mean=0, std=1
-print(f"x =torch.empty(size=(1, 5)).normal_(mean=0, std=1): \n{x}\n")
+print(f"x = torch.empty(size=(1, 5)).normal_(mean=0, std=1): \n{x}\n")
 x = torch.empty(size=(1, 5)).uniform_(0, 1)  # Values from a uniform distribution low=0, high=1
-print(f"x =torch.empty(size=(1, 5)).uniform_(0, 1): \n{x}\n")
+print(f"x = torch.empty(size=(1, 5)).uniform_(0, 1): \n{x}\n")
 x = torch.diag(torch.ones(3))  # Diagonal matrix of shape 3x3
-print(f"x =torch.diag(torch.ones(3)): \n{x}\n")
+print(f"x = torch.diag(torch.ones(3)): \n{x}\n")
 
 # How to make initialized tensors to other types (int, float, double)
 # These will work even if you're on CPU or CUDA!
@@ -82,7 +82,7 @@ print(f"np_array_again = tensor.numpy(): \n{np_array_again}\n")  # Converted to 
 # =============================================================================== #
 
 x = torch.tensor([1, 2, 3])
-print(f"x = orch.tensor([1, 2, 3]): \n{x}\n")  # Converted to float64
+print(f"x = torch.tensor([1, 2, 3]): \n{x}\n")  # Converted to float64
 y = torch.tensor([9, 8, 7])
 print(f"y = torch.tensor([9, 8, 7]): \n{y}\n")  # Converted to float64
 
@@ -94,11 +94,11 @@ print(f"torch.add(x, y, out=z1): \n{z1}\n")  # Converted to float64
 z2 = torch.add(x, y)  # This is another way
 print(f"z2 = torch.add(x, y): \n{z2}\n")  # Converted to float64
 z = x + y  # This is my preferred way, simple and clean.
-print(f"z = x - y: \n{z}\n")  # Converted to float64
+print(f"z = x + y: \n{z}\n")  # Converted to float64
 
 # -- Subtraction --
 z = x - y  # We can do similarly as the preferred way of addition
-print(f"z = x + y: \n{z}\n")  # Converted to float64
+print(f"z = x - y: \n{z}\n")  # Converted to float64
 
 # -- Division (A bit clunky) --
 z = torch.true_divide(x, y)  # Will do element wise division if of equal shape
@@ -138,7 +138,7 @@ print(f"x3 = x1.mm(x2): \n{x3}\n")
 # -- Matrix Exponentiation --
 matrix_exp = torch.rand(5, 5)
 print(f"matrix_exp = torch.rand(5, 5): \n{matrix_exp}\n")
-matrix_exp2 = matrix_exp.matrix_power(3)  # is same as matrix_exp (mm) matrix_exp (mm) matrix_exp
+matrix_exp2 = matrix_exp.matrix_power(3)  # is same as torch.mm(matrix_exp,matrix_exp).mm(matrix_exp)
 print(f"matrix_exp2 = matrix_exp.matrix_power(3): \n{matrix_exp2}\n")
 
 # -- Element wise Multiplication --
@@ -150,10 +150,10 @@ z = torch.dot(x, y)  # Dot product, in this case z = 1*9 + 2*8 + 3*7
 print(f"z = torch.dot(x, y): \n{z}\n")
 
 # -- Batch Matrix Multiplication --
-batch = 32
-n = 10
-m = 20
-p = 30
+batch = 2
+n = 5
+m = 4
+p = 3
 tensor1 = torch.rand((batch, n, m))
 print(f"tensor1 = torch.rand((batch, n, m)): \n{tensor1}\n")
 tensor2 = torch.rand((batch, m, p))
@@ -207,8 +207,9 @@ print(f"z = torch.all(x): \n{z}\n")
 #                        Tensor Indexing                        #
 # ============================================================= #
 
-batch_size = 10
-features = 25
+batch_size = 3
+features = 10
+print(f"batch_size = {batch_size}, features = {features}")
 x = torch.rand((batch_size, features))
 print(f"x = torch.rand((batch_size, features)): \n{x}\n")
 
@@ -242,7 +243,6 @@ print(f"x[rows, cols]: \n{x[rows, cols]}\n")  # Gets second row fifth column and
 # More advanced indexing
 x = torch.arange(10)
 print(f"x = torch.arange(10): \n{x}\n")
-print(f"x[(x < 2) | (x > 8)]: \n{x[(x < 2) | (x > 8)]}\n")
 print(f"x[(x < 2) | (x > 8)]: \n{x[(x < 2) | (x > 8)]}\n")  # will be [0, 1, 9]
 print(f"x[x.remainder(2) == 0]: \n{x[x.remainder(2) == 0]}\n")
 
@@ -273,13 +273,15 @@ print(f"x_3x3 = x.view(3, 3): \n{x_3x3}\n")
 # for reshape it doesn't matter because it will copy the
 # tensor to make it contiguously stored, which might come
 # with some performance loss.
+# https://blog.csdn.net/qq_42761751/article/details/144194736
+# https://blog.csdn.net/qq_28949847/article/details/128568811
+# 功能同reshape相似，但是 view()只能操作 tensor，reshape()可以操作 tensor 和 ndarray。view()只能用在 contiguous (连续)的变量上。如果在 view 之前用了 transpose,permute 等切片处理，需要用 contiquous()来返回-个 contiguous copy。pytorch园 中的 torch.reshape()大致相当于 tensor.contiguous().view()
 x_3x3 = x.reshape(3, 3)
 print(f"x_3x3 = x.reshape(3, 3): \n{x_3x3}\n")
 
 # If we for example do:
 y = x_3x3.t()
 print(f"y = x_3x3.t(): \n{y}\n")
-print(f"y.is_contiguous(): \n{y.is_contiguous()}\n")
 print(f"y.is_contiguous(): \n{y.is_contiguous()}\n")  # This will return False and if we try to use view now, it won't work!
 # y.view(9) would cause an error, reshape however won't
 
@@ -302,13 +304,13 @@ z = x1.view(-1)  # And -1 will unroll everything
 print(f"z = x1.view(-1): \n{z}\n")
 
 # If we instead have an additional dimension and we wish to keep those as is we can do:
-batch = 64
-x = torch.rand((batch, 2, 5))
-print(f"x = torch.rand((batch, 2, 5)): \n{x}\n")
-z = x.view(batch, -1)  # And z.shape would be 64x10, this is very useful stuff and is used all the time
+batch = 2
+x = torch.rand((batch, 4, 5))
+print(f"x = torch.rand((batch, 4, 5)): \n{x}\n")
+z = x.view(batch, -1)  # And z.shape would be 2x20, this is very useful stuff and is used all the time
 print(f"z = x.view(batch, -1): \n{z}\n")
 
-# Let's say we want to switch x axis so that instead of 64x2x5 we have 64x5x2
+# Let's say we want to switch x axis so that instead of 2x4x5 we have 2x5x4
 # I.e we want dimension 0 to stay, dimension 1 to become dimension 2, dimension 2 to become dimension 1
 # Basically you tell permute where you want the new dimensions to be, torch.transpose is a special case
 # of permute (why?)
@@ -316,7 +318,7 @@ z = x.permute(0, 2, 1)
 print(f"z = x.permute(0, 2, 1): \n{z}\n")
 
 # Splits x last dimension into chunks of 2 (since 5 is not integer div by 2) the last dimension
-# will be smaller, so it will split it into two tensors: 64x2x3 and 64x2x2
+# will be smaller, so it will split it into two tensors: 2x2x5 and 2x2x5
 z = torch.chunk(x, chunks=2, dim=1)
 print(f"z = torch.chunk(x, chunks=2, dim=1): \n{z}\n")
 print(f"z[0].shape: \n{z[0].shape}\n")
@@ -331,9 +333,11 @@ print(f"x.unsqueeze(1).shape: \n{x.unsqueeze(1).shape}\n") # 10x1
 # Let's say we have x which is 1x1x10 and we want to remove a dim so we have 1x10
 x = torch.arange(10).unsqueeze(0).unsqueeze(1)
 print(f"x = torch.arange(10).unsqueeze(0).unsqueeze(1): \n{x}\n")
+print(f"x.shape: \n{x.shape}\n")
 
 # Perhaps unsurprisingly
 z = x.squeeze(1)  # can also do .squeeze(0) both returns 1x10
 print(f"z = x.squeeze(1): \n{z}\n")
+print(f"z.shape: \n{z.shape}\n")
 
 # That was some essential Tensor operations, hopefully you found it useful!
